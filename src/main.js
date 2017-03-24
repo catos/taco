@@ -24,7 +24,8 @@ app.on('ready', _ => {
     mainWindow.openDevTools()
 
     // mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
-    mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
+    // mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
+    mainWindow.loadURL(`file://${__dirname}/filelist/filelist.html`);
     
     mainWindow.on('close', _ => {
         mainWindow = null
