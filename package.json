@@ -1,0 +1,24 @@
+{
+  "name": "taco",
+  "productName": "TaCommander",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/catos/taco.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/catos/taco/issues"
+  },
+  "homepage": "https://github.com/catos/taco#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.13"
+  }
+}
