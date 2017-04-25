@@ -20,5 +20,6 @@
   "homepage": "https://github.com/catos/taco#readme",
   "devDependencies": {
     "electron-prebuilt": "^1.4.13"
-  }
+  },
+  "dependencies": {}
 }
