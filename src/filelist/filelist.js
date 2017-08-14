@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const DELIMITER = '\\'
+const DEFAULT_PATH = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME
 const PARENT_DIRECTORY = {
     order: -1,
     name: '..',
@@ -11,25 +11,10 @@ const PARENT_DIRECTORY = {
 }
 
 Vue.component('filelist', {
-    // template: '#filelist',
-    template: `
-        <div class="filelist">
-            <div class="mdl-textfield mdl-js-textfield">
-                <input id="path" class="mdl-textfield__input" type="text" v-model="path" @keyup.enter="getFiles()" />
-                <label class="mdl-textfield__label" for="path">Path</label>
-            </div>                
-            <table class="mdl-data-table mdl-js-data-table">
-                <tr class="file" v-bind:class="{ folder: file.stats.isDirectory }" v-for="file in sortedFiles" @click="gotoFolder(file.name)">
-                    <td class="mdl-data-table__cell--non-numeric">{{ file.name }}</td>    
-                    <td class="size">{{ file.stats.size | kbSize }}</td>
-                    <td class="created">{{ file.stats.created | toShortDate }}</td>
-                </tr>
-            </table>
-        </div>
-    `,
+    template: '#filelist',
     data: function () {
         return {
-            path: DELIMITER,
+            path: DEFAULT_PATH,
             files: [PARENT_DIRECTORY]
         }
     },
@@ -53,14 +38,12 @@ Vue.component('filelist', {
     },
     methods: {
         gotoFolder: function (folder) {
-            if (folder === '..') {
-                this.path = this.path.substring(0, this.path.lastIndexOf(DELIMITER))
-            } else {
-                this.path = path.join(this.path, folder)
-            }
+            this.path = (folder === '..') ?
+                path.join(this.path, '..') :
+                path.join(this.path, folder)
 
             if (!this.path.length) {
-                this.path = DELIMITER
+                this.path = DEFAULT_PATH
             }
 
             this.getFiles()
