@@ -41,7 +41,7 @@ main {
     white-space: nowrap;
 }
 
-.filelist .folder {
+.filelist .folder .name {
     text-decoration: underline;
     color: blue;
     cursor: pointer;

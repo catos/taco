@@ -71,7 +71,7 @@
             <div class="table-wrapper">
                 <table class="mdl-data-table mdl-js-data-table">
                     <tr class="file" v-bind:class="{ folder: file.stats.isDirectory }" v-for="file in sortedFiles" @click="gotoFolder(file.name)">
-                        <td class="mdl-data-table__cell--non-numeric">{{ file.name }}</td>
+                        <td class="mdl-data-table__cell--non-numeric name">{{ file.name }}</td>
                         <td class="size">{{ file.stats.size | kbSize }}</td>
                         <td class="created">{{ file.stats.created | toShortDate }}</td>
                     </tr>

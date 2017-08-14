@@ -36,6 +36,10 @@ app.on('ready', _ => {
         mainWindow.webContents.send('capture', app.getPath('pictures'))
     })
 
+    globalShortcut.register('CommandOrControl+T', _ => {
+        console.log('focus on path input!')
+    })
+
     appMenu.buildAndSet()
     appTray.create();
 
