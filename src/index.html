@@ -64,7 +64,7 @@
         <div class="filelist">
             <div class="path-wrapper">
                 <div class="mdl-textfield mdl-js-textfield">
-                    <input id="path" class="mdl-textfield__input" type="text" v-model="path" @keyup.enter="getFiles()" />
+                    <input id="path" ref="path" class="mdl-textfield__input" type="text" v-model="path" @keyup.enter="getFiles()" />
                     <label class="mdl-textfield__label" for="path">Path</label>
                 </div>
             </div>

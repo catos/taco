@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const ipcRenderer = require('electron').ipcRenderer
 
 const DEFAULT_PATH = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME
 const PARENT_DIRECTORY = {
@@ -21,6 +22,13 @@ Vue.component('filelist', {
     created: function () {
         this.getFiles()
     },
+    mounted: function () {
+        let context = this;
+        ipcRenderer.on('ping', (event, message) => {
+            console.log('woooooooooooooooooooooooooot!')
+            context.$refs.path.focus()
+        })
+    },    
     computed: {
         sortedFiles: function () {
 
