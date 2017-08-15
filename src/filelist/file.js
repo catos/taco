@@ -1,10 +1,17 @@
+const shell = require('electron').shell;
+const path = require('path');
+
 Vue.component('file', {
     template: '#file',
     props: ['file'],
     methods: {
-        changeFolder: function (folder) {
-            console.log('file -> changeFolder', folder);
-            this.$emit('change-folder', folder)
+        onClick: function (file) {
+            console.log('onClick', file);
+
+            if (file.isDirectory)
+                this.$emit('change-folder', file.name)
+
+            shell.openItem(path.join(file.path, file.name))
         }
     },
     filters: {

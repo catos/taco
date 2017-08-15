@@ -79,10 +79,10 @@
 
     <!-- FILE TEMPLATE -->
     <template id="file">
-        <tr class="file" v-bind:class="{ folder: file.stats.isDirectory }">
-            <td class="mdl-data-table__cell--non-numeric name" @click="changeFolder(file.name)">{{ file.name }}</td>
-            <td class="size">{{ file.stats.size | kbSize }}</td>
-            <td class="created">{{ file.stats.created | toShortDate }}</td>
+        <tr class="file" v-bind:class="{ folder: file.isDirectory }">
+            <td class="mdl-data-table__cell--non-numeric name" @click="onClick(file)">{{ file.name }}</td>
+            <td class="size">{{ file.size | kbSize }}</td>
+            <td class="created">{{ file.created | toShortDate }}</td>
         </tr>        
     </template>
 

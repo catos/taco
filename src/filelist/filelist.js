@@ -6,9 +6,7 @@ const DEFAULT_PATH = (process.platform === 'win32') ? process.env.HOMEPATH : pro
 const PARENT_DIRECTORY = {
     order: -1,
     name: '..',
-    stats: {
-        isDirectory: true
-    }
+    isDirectory: true
 }
 
 Vue.component('filelist', {
@@ -63,15 +61,18 @@ Vue.component('filelist', {
                 }
 
                 for (let file of files) {
-                    var stats = this.fileStats(path.join(this.path, file))
+                    var stats = fs.lstatSync(path.join(this.path, file))
 
                     var entry = {
                         order: 1,
                         name: file,
-                        stats: stats
+                        path: this.path,
+                        isDirectory: stats.isDirectory(),
+                        size: stats.size,
+                        created: stats.ctime.toISOString()
                     }
 
-                    if (stats.isDirectory)
+                    if (entry.isDirectory)
                         entry.order = 0
 
                     result.push(entry)
@@ -79,18 +80,19 @@ Vue.component('filelist', {
             })
             this.files = result
         },
-        fileStats: function (dir) {
-            try {
-                var stats = fs.lstatSync(dir)
+        // TODO: may want this to be separate method
+        // fileStats: function (dir) {
+        //     try {
+        //         var stats = fs.lstatSync(dir)
 
-                return {
-                    isDirectory: stats.isDirectory(),
-                    size: stats.size,
-                    created: stats.ctime.toISOString()
-                }
-            } catch (e) {
-                return false
-            }
-        },
+        //         return {
+        //             isDirectory: stats.isDirectory(),
+        //             size: stats.size,
+        //             created: stats.ctime.toISOString()
+        //         }
+        //     } catch (e) {
+        //         return false
+        //     }
+        // },
     }
 })
