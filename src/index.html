@@ -2,96 +2,75 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Taco 2</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+	<title>Taco 2</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <link rel="stylesheet" href="./styles.css">
-    <script src="https://unpkg.com/vue"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	 crossorigin="anonymous">
+	<link rel="stylesheet" href="./styles.css">
+	<script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
 
-    <div id="app">
+	<div id="app">
 
-        <div class="mdl-layout mdl-js-layout">
+		<header>
+			Header
+		</header>
 
-            <header class="mdl-layout__header">
-                <div class="mdl-layout-icon"></div>
-                <div class="mdl-layout__header-row">
-                    <span class="mdl-layout__title">Material Design Lite</span>
-                    <div class="mdl-layout-spacer"></div>
-                    <nav class="mdl-navigation">
-                        <a class="mdl-navigation__link" href="#">Hello</a>
-                        <a class="mdl-navigation__link" href="#">World.</a>
-                        <a class="mdl-navigation__link" href="#">How</a>
-                        <a class="mdl-navigation__link" href="#">Are</a>
-                        <a class="mdl-navigation__link" href="#">You?</a>
-                    </nav>
-                </div>
-            </header>
+		<main>
+			<div class="container-fluid">
+				<div class="row no-gutters">
+					<div class="col">
+						<filelist></filelist>
+					</div>
+					<div class="col">
+						<filelist></filelist>
+					</div>
+				</div>
+			</div>
+		</main>
 
-            <div class="mdl-layout__drawer">
-                <span class="mdl-layout__title">Material Design Lite</span>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" href="#">Hello</a>
-                    <a class="mdl-navigation__link" href="#">World.</a>
-                    <a class="mdl-navigation__link" href="#">How</a>
-                    <a class="mdl-navigation__link" href="#">Are</a>
-                    <a class="mdl-navigation__link" href="#">You?</a>
-                </nav>
-            </div>
+		<footer>
+			Footer
+		</footer>
 
-            <main class="mdl-layout__content">
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <filelist></filelist>
-                    </div>
-                    <div class="mdl-cell mdl-cell--6-col">
-                        <filelist></filelist>
-                    </div>
-                </div>
-            </main>
+	</div>
 
-        </div>
+	<!-- FILELIST TEMPLATE -->
+	<template id="filelist">
+		<div class="filelist">
+			<input id="path" ref="path" type="text" v-model="path" @keyup.enter="getFiles()" />
+			<table class="table table-responsive">
+				<tbody>
+					<tr is="file" v-for="file in sortedFiles" 
+						:key="file.name" 
+						:file="file" 
+						v-on:change-folder="onChangeFolder"></tr>
+				</tbody>
+			</table>
+		</div>
+	</template>
 
-    </div>
+	<!-- FILE TEMPLATE -->
+	<template id="file">
+		<tr class="file" 
+			v-bind:class="[{ selected: file.selected }, { folder: file.isDirectory }]" 
+			@click="onClick(file)" 
+			@dblclick="onDblClick(file)">
+			<td class="name">{{ file.name }}</td>
+			<td class="size">{{ file.size | kbSize }}</td>
+			<td class="created">{{ file.created | toShortDate }}</td>
+		</tr>
+	</template>
 
-    <!-- FILELIST TEMPLATE -->
-    <template id="filelist">
-        <div class="filelist">
-            <div class="path-wrapper">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input id="path" ref="path" class="mdl-textfield__input" type="text" v-model="path" @keyup.enter="getFiles()" />
-                    <label class="mdl-textfield__label" for="path">Path</label>
-                </div>
-            </div>
-            <div class="table-wrapper">
-                <table class="mdl-data-table mdl-js-data-table">
-                    <file v-for="file in sortedFiles" :key="file.name" :file="file" v-on:change-folder="onChangeFolder"></file>
-                </table>
-            </div>
-        </div>
-    </template>
-
-
-    <!-- FILE TEMPLATE -->
-    <template id="file">
-        <tr class="file" v-bind:class="{ folder: file.isDirectory }">
-            <td class="mdl-data-table__cell--non-numeric name" @click="onClick(file)">{{ file.name }}</td>
-            <td class="size">{{ file.size | kbSize }}</td>
-            <td class="created">{{ file.created | toShortDate }}</td>
-        </tr>        
-    </template>
-
-    <!-- SCRIPTS -->
-    <script>
-        require('./filelist/filelist')
-        require('./filelist/file')
-        require('./main')
-    </script>
+	<!-- SCRIPTS -->
+	<script>
+		require('./filelist/filelist')
+		require('./filelist/file')
+		require('./main')
+	</script>
 </body>
 
 </html>

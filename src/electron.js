@@ -32,13 +32,17 @@ app.on('ready', _ => {
         mainWindow = null
     })
 
+	// TODO: setup / naming convention on shortcuts....
     globalShortcut.register('CommandOrControl+Alt+D', _ => {
         mainWindow.webContents.send('capture', app.getPath('pictures'))
     })
 
     globalShortcut.register('CommandOrControl+T', _ => {
-        console.log('CommandOrControl+T!')
         mainWindow.webContents.send('shortcut-path-focus', 'weee!')
+    })
+
+    globalShortcut.register('Escape', _ => {
+        mainWindow.webContents.send('shortcut-escape', 'weee!')
     })
 
     appMenu.buildAndSet()

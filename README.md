@@ -8,4 +8,11 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
-- Clipboard keyboard shortcuts not working
+- Refactor global shortcuts (add "mediator" which logs events)
+- Refactor custom vue events (add "mediator" which logs events)
+- Typescript (wtb: class, interfaces and types...)
+- Add eventlog for debuging
+- Rename filelist to ...
+- .vue-files ?
+- Right click menu on files
+- Continue select files thingy

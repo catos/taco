@@ -1,39 +1,52 @@
-const shell = require('electron').shell;
-const path = require('path');
+const shell = require('electron').shell
+const path = require('path')
 
 Vue.component('file', {
-    template: '#file',
-    props: ['file'],
-    methods: {
-        onClick: function (file) {
-            console.log('onClick', file);
+	template: '#file',
+	props: ['file'],
+	data: () => {
+		return {
+			selected: false
+		}
+	},
+	methods: {
+		onClick: function (file) {
+			console.log('onclick', this.file);
+			this.file.selected = !this.file.selected
+		},
+		onDblClick: function (file) {
+			if (file.isDirectory) {
+				this.$emit('change-folder', file.name)
+			} else {
+				shell.openItem(path.join(file.path, file.name))
+			}
+		}
+	},
+	filters: {
+		kbSize: function (value) {
+			if (!value)
+				return ''
 
-            if (file.isDirectory)
-                this.$emit('change-folder', file.name)
+			// Display size in KB
+			var result = Math.floor(value / 1024)
 
-            shell.openItem(path.join(file.path, file.name))
-        }
-    },
-    filters: {
-        kbSize: function (value) {
-            if (!value)
-                return ''
+			// Min size is 1
+			if (result < 1)
+				result = 1
 
-            var result = Math.floor(value / 1024)
+			// Format number
+			result = result.toLocaleString(undefined, { minimumFractionDigits: 0 })
 
-            if (result < 1)
-                result = 1
+			return result + ' KB'
+		},
+		toShortDate: function (value) {
+			if (!value)
+				return ''
 
-            return result + ' KB'
-        },
-        toShortDate: function (value) {
-            if (!value)
-                return ''
+			if (value.length < 10)
+				return value
 
-            if (value.length < 10)
-                return value
-
-            return value.slice(0, 10)
-        }
-    }
+			return value.slice(0, 10)
+		}
+	}
 })

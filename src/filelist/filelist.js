@@ -21,9 +21,14 @@ Vue.component('filelist', {
         this.getFiles()
     },
     mounted: function () {
-        let context = this;
         ipcRenderer.on('shortcut-path-focus', (event, message) => {
-            context.$refs.path.focus()
+            this.$refs.path.focus()
+		})
+		
+        ipcRenderer.on('shortcut-escape', (event, message) => {
+            this.files.forEach((file) => {
+				file.selected = false
+			}, this);
         })
     },
     computed: {
@@ -66,7 +71,8 @@ Vue.component('filelist', {
                     var entry = {
                         order: 1,
                         name: file,
-                        path: this.path,
+						path: this.path,
+						selected: false,
                         isDirectory: stats.isDirectory(),
                         size: stats.size,
                         created: stats.ctime.toISOString()
