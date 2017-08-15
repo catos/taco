@@ -4,7 +4,7 @@ Vue.component('file', {
     methods: {
         changeFolder: function (folder) {
             console.log('file -> changeFolder', folder);
-            this.$emit('changeFolder', [folder])
+            this.$emit('change-folder', folder)
         }
     },
     filters: {

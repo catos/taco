@@ -30,7 +30,6 @@ Vue.component('filelist', {
     },
     computed: {
         sortedFiles: function () {
-
             var cmp = function (a, b) {
                 if (a > b) return +1;
                 if (a < b) return -1;
@@ -45,16 +44,15 @@ Vue.component('filelist', {
     },
     methods: {
         onChangeFolder: function (folder) {
-            console.log('onChangeFolder', this.path, folder);
-            // this.path = (folder === '..') ?
-            //     path.join(this.path, '..') :
-            //     path.join(this.path, folder)
+            this.path = (folder === '..') ?
+                path.join(this.path, '..') :
+                path.join(this.path, folder)
 
-            // if (!this.path.length) {
-            //     this.path = DEFAULT_PATH
-            // }
+            if (!this.path.length) {
+                this.path = DEFAULT_PATH
+            }
 
-            // this.getFiles()
+            this.getFiles()
         },
         getFiles: function () {
             var result = [PARENT_DIRECTORY]
