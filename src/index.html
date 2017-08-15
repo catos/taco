@@ -70,19 +70,26 @@
             </div>
             <div class="table-wrapper">
                 <table class="mdl-data-table mdl-js-data-table">
-                    <tr class="file" v-bind:class="{ folder: file.stats.isDirectory }" v-for="file in sortedFiles" @click="gotoFolder(file.name)">
-                        <td class="mdl-data-table__cell--non-numeric name">{{ file.name }}</td>
-                        <td class="size">{{ file.stats.size | kbSize }}</td>
-                        <td class="created">{{ file.stats.created | toShortDate }}</td>
-                    </tr>
+                    <file v-for="file in sortedFiles" :key="file.name" :file="file" v-on:change-folder="onChangeFolder"></file>
                 </table>
             </div>
         </div>
     </template>
 
+
+    <!-- FILE TEMPLATE -->
+    <template id="file">
+        <tr class="file" v-bind:class="{ folder: file.stats.isDirectory }">
+            <td class="mdl-data-table__cell--non-numeric name" @click="changeFolder(file.name)">{{ file.name }}</td>
+            <td class="size">{{ file.stats.size | kbSize }}</td>
+            <td class="created">{{ file.stats.created | toShortDate }}</td>
+        </tr>        
+    </template>
+
     <!-- SCRIPTS -->
     <script>
         require('./filelist/filelist')
+        require('./filelist/file')
         require('./main')
     </script>
 </body>

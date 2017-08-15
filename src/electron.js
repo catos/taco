@@ -38,7 +38,7 @@ app.on('ready', _ => {
 
     globalShortcut.register('CommandOrControl+T', _ => {
         console.log('CommandOrControl+T!')
-        mainWindow.webContents.send('ping', 'wooooooooooooh!')
+        mainWindow.webContents.send('shortcut-path-focus', 'weee!')
     })
 
     appMenu.buildAndSet()

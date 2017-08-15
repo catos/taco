@@ -24,11 +24,10 @@ Vue.component('filelist', {
     },
     mounted: function () {
         let context = this;
-        ipcRenderer.on('ping', (event, message) => {
-            console.log('woooooooooooooooooooooooooot!')
+        ipcRenderer.on('shortcut-path-focus', (event, message) => {
             context.$refs.path.focus()
         })
-    },    
+    },
     computed: {
         sortedFiles: function () {
 
@@ -45,16 +44,17 @@ Vue.component('filelist', {
         }
     },
     methods: {
-        gotoFolder: function (folder) {
-            this.path = (folder === '..') ?
-                path.join(this.path, '..') :
-                path.join(this.path, folder)
+        onChangeFolder: function (folder) {
+            console.log('onChangeFolder', this.path, folder);
+            // this.path = (folder === '..') ?
+            //     path.join(this.path, '..') :
+            //     path.join(this.path, folder)
 
-            if (!this.path.length) {
-                this.path = DEFAULT_PATH
-            }
+            // if (!this.path.length) {
+            //     this.path = DEFAULT_PATH
+            // }
 
-            this.getFiles()
+            // this.getFiles()
         },
         getFiles: function () {
             var result = [PARENT_DIRECTORY]
@@ -94,27 +94,5 @@ Vue.component('filelist', {
                 return false
             }
         },
-    },
-    filters: {
-        kbSize: function (value) {
-            if (!value)
-                return ''
-
-            var result = Math.floor(value / 1024)
-
-            if (result < 1)
-                result = 1
-
-            return result + ' KB'
-        },
-        toShortDate: function (value) {
-            if (!value)
-                return ''
-
-            if (value.length < 10)
-                return value
-
-            return value.slice(0, 10)
-        }
     }
 })
