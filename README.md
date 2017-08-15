@@ -16,3 +16,4 @@
 - .vue-files ?
 - Right click menu on files
 - Continue select files thingy
+- Execute shell / terminal commands:https://stackoverflow.com/a/17466459
