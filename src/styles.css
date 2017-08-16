@@ -23,7 +23,11 @@ body {
 }
 
 .filelist tr.selected {
-	background-color: #fee;
+	background-color: #e1e1ff;
+}
+
+.filelist tr:hover {
+	background-color: #eeeeff;
 }
 
 .filelist td {

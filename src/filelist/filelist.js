@@ -67,7 +67,7 @@ Vue.component('filelist', {
                 }
 
                 for (let file of files) {
-                    var stats = fs.lstatSync(path.join(this.path, file))
+                    var stats = this.fileStats(path.join(this.path, file))
 
                     var entry = {
                         order: 1,
@@ -75,9 +75,9 @@ Vue.component('filelist', {
                         path: this.path,
                         iconClass: 'fa-file-o',
 						selected: false,
-                        isDirectory: stats.isDirectory(),
+                        isDirectory: stats.isDirectory,
                         size: stats.size,
-                        created: stats.ctime.toISOString()
+                        created: stats.created
                     }
 
                     if (entry.isDirectory) {
@@ -90,19 +90,18 @@ Vue.component('filelist', {
             })
             this.files = result
         },
-        // TODO: may want this to be separate method
-        // fileStats: function (dir) {
-        //     try {
-        //         var stats = fs.lstatSync(dir)
+        fileStats: function (path) {
+            try {
+                var stats = fs.lstatSync(path)
 
-        //         return {
-        //             isDirectory: stats.isDirectory(),
-        //             size: stats.size,
-        //             created: stats.ctime.toISOString()
-        //         }
-        //     } catch (e) {
-        //         return false
-        //     }
-        // },
+                return {
+                    isDirectory: stats.isDirectory(),
+                    size: stats.size,
+                    created: stats.ctime.toISOString()
+                }
+            } catch (e) {
+                return false
+            }
+        },
     }
 })
