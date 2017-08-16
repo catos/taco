@@ -6,6 +6,7 @@ const DEFAULT_PATH = (process.platform === 'win32') ? process.env.HOMEPATH : pro
 const PARENT_DIRECTORY = {
     order: -1,
     name: '..',
+    iconClass: 'fa-folder-o',
     isDirectory: true
 }
 
@@ -71,15 +72,18 @@ Vue.component('filelist', {
                     var entry = {
                         order: 1,
                         name: file,
-						path: this.path,
+                        path: this.path,
+                        iconClass: 'fa-file-o',
 						selected: false,
                         isDirectory: stats.isDirectory(),
                         size: stats.size,
                         created: stats.ctime.toISOString()
                     }
 
-                    if (entry.isDirectory)
+                    if (entry.isDirectory) {
                         entry.order = 0
+                        entry.iconClass = 'fa-folder-o'
+                    }
 
                     result.push(entry)
                 }

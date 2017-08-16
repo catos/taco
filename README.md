@@ -17,3 +17,7 @@
 - Right click menu on files
 - Continue select files thingy
 - Execute shell / terminal commands:https://stackoverflow.com/a/17466459
+- Continue icons-implementation
+- Detect if file is text or binary
+- Add more file properties
+
