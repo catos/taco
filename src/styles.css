@@ -1,26 +1,69 @@
-body {
-	font-size: 14px;
-    background-color: gray;
+* {
+    margin: 0;
 }
 
-.container-fluid {
-    padding: 0;
+html, body {
+    height: 100vh;
+}
+
+body {
+	font-size: 14px;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: 64px;
+    background: lightblue;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+}
+
+footer {
+    height: 64px;
+    background: lightblue;
 }
 
 .filelist {
-    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex: 1 1;
+    flex-direction: column;
 }
 
-.filelist:last-child {
-    padding-left: 10px;
+.filelist .path {
+    width: 100%;
 }
 
-.filelist table {
-    height: 800px;
-    overflow-y: scroll;
-    table-layout: fixed;
-    display: block;
+.filelist .path input {
+    outline: none;
+    border: none;
+    border-bottom: 1px solid grey;
+    transition: all 0.3s;
+    box-shadow: none;
+    font-size: 16px;
+    padding: 5px;
 }
+
+.filelist .path:focus {
+    border-bottom: 2px solid cadetblue;
+}
+
+.filelist .files {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0px;
+}
+
+/***************************************************/
 
 .filelist tr.selected {
 	background-color: #e1e1ff;
@@ -34,10 +77,6 @@ body {
 	padding: 0;
 	white-space: nowrap;
 	width: 1%;
-}
-
-.filelist td:last-child {
-	padding-left: 10px;
 }
 
 .filelist .file {
@@ -62,11 +101,6 @@ body {
 .filelist .folder .name {
     color: blue;
 }
-
-/* .filelist .file:hover, 
-.filelist .folder:hover {
-    background-color: whitesmoke;
-}     */
 
 .filelist .file .size {
     text-align: right;
