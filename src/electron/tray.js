@@ -16,7 +16,7 @@ exports.template = [
 
 
 exports.create = _ => {
-    const tray = new Tray(path.join('src', 'images/electron-icon.png'))
+    const tray = new Tray(path.join('src', 'electron/images/electron-icon.png'))
 
     let menu = Menu.buildFromTemplate(this.template);
     tray.setContextMenu(menu)

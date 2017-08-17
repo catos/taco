@@ -7,9 +7,9 @@ const { app, clipboard, globalShortcut, Menu, Tray, BrowserWindow } = electron
 
 // ------------------------------------------------------------
 
-const appMenu = require('./menu')
-const appTray = require('./tray')
-const appClipboard = require('./clipboard')
+const appMenu = require('./electron/menu')
+const appTray = require('./electron/tray')
+const appClipboard = require('./electron/clipboard')
 
 // ------------------------------------------------------------
 
@@ -26,13 +26,18 @@ app.on('ready', _ => {
     // mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
     // mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
     // mainWindow.loadURL(`file://${__dirname}/filelist/filelist.html`);
-    mainWindow.loadURL(`file://${__dirname}/index.html`);
+    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
     
     mainWindow.on('close', _ => {
         mainWindow = null
     })
 
-	// TODO: setup / naming convention on shortcuts....
+    // GLOBAL shortcuts: only use for focus on app
+    globalShortcut.register('CommandOrControl+T', _ => {
+        mainWindow.focus()
+    })
+
+	// TODO: LOCAL shortcuts && setup / naming convention on shortcuts....
     globalShortcut.register('CommandOrControl+Alt+D', _ => {
         mainWindow.webContents.send('capture', app.getPath('pictures'))
     })
@@ -45,7 +50,7 @@ app.on('ready', _ => {
         mainWindow.webContents.send('shortcut-escape', 'weee!')
     })
 
-    appMenu.buildAndSet()
+    appMenu.buildAndSet(mainWindow)
     appTray.create();
 
     let stack = []
@@ -54,7 +59,7 @@ app.on('ready', _ => {
         appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
 
         appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
-        appMenu.buildAndSet()
+        appMenu.buildAndSet(mainWindow)
 
         console.log('stack', stack);
     })

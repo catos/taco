@@ -8,15 +8,14 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
+- Rename filelist to ...
+- Set focus on filelist, may need a new component to contain filelists
+- ESLint
+- Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)
 - Refactor custom vue events (add "mediator" which logs events)
-- Typescript (wtb: class, interfaces and types...)
-- Add eventlog for debuging
-- Rename filelist to ...
-- .vue-files ?
 - Right click menu on files
 - Continue select files thingy
-- Execute shell / terminal commands:https://stackoverflow.com/a/17466459
 - Continue icons-implementation
 - Detect if file is text or binary
 - Add more file properties

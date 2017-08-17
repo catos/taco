@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const ipcRenderer = require('electron').ipcRenderer
 
-const DEFAULT_PATH = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME
+const HOMEPATH = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME
 const PARENT_DIRECTORY = {
     order: -1,
     name: '..',
@@ -12,18 +12,26 @@ const PARENT_DIRECTORY = {
 
 Vue.component('filelist', {
     template: '#filelist',
+    props: ['id'],
     data: function () {
         return {
-            path: DEFAULT_PATH,
+            path: HOMEPATH,
             files: [PARENT_DIRECTORY]
         }
     },
     created: function () {
         this.getFiles()
+
+        console.log('this.id', this.id)
     },
     mounted: function () {
         ipcRenderer.on('shortcut-path-focus', (event, message) => {
             this.$refs.path.focus()
+		})
+		
+        ipcRenderer.on('shortcut-goto-home', (event) => {
+            this.path = HOMEPATH
+            this.getFiles()
 		})
 		
         ipcRenderer.on('shortcut-escape', (event, message) => {
@@ -47,13 +55,17 @@ Vue.component('filelist', {
         }
     },
     methods: {
+        onMouseOver: function () {
+            console.log('mouse over!')
+            this.$emit('set-focus', this.id)
+        },
         onChangeFolder: function (folder) {
             this.path = (folder === '..') ?
                 path.join(this.path, '..') :
                 path.join(this.path, folder)
 
             if (!this.path.length) {
-                this.path = DEFAULT_PATH
+                this.path = HOMEPATH
             }
 
             this.getFiles()

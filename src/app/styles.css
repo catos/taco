@@ -54,6 +54,9 @@ footer {
     font-size: 16px;
     padding: 5px;
 }
+.filelist:focus {
+    border: 1px solid red;
+}
 
 .filelist .path:focus {
     border-bottom: 2px solid cadetblue;
@@ -97,7 +100,7 @@ footer {
 }
 
 .filelist .created {
-	width: 100px;
+	padding-left: 10px;
 }
 
 .filelist .folder .name {

@@ -7,7 +7,7 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
 	 crossorigin="anonymous">
-	<link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./styles.css">
 	<script src="https://unpkg.com/vue"></script>
 </head>
@@ -20,8 +20,8 @@
 		</header>
 
 		<main>
-			<filelist></filelist>
-			<filelist></filelist>
+			<filelist id="filelist-1"></filelist>
+			<filelist id="filelist-2"></filelist>
 		</main>
 
 		<footer>
@@ -32,7 +32,7 @@
 
 	<!-- FILELIST TEMPLATE -->
 	<template id="filelist">
-		<div class="filelist">
+		<div class="filelist" :id="id" @mouseover="onMouseOver">
 			<div class="path">
 				<input id="path" class="path" ref="path" type="text" v-model="path" @keyup.enter="getFiles()" />
 			</div>
@@ -48,8 +48,8 @@
 
 	<!-- FILE TEMPLATE -->
 	<template id="file">
-		<tr class="file" v-bind:class="[{ selected: file.selected }, { folder: file.isDirectory }]" @click="onClick(file)" @dblclick="onDblClick(file)">
-			<td class="name"><i class="fa" v-bind:class="file.iconClass" aria-hidden="true"></i> {{ file.name }}</td>
+		<tr class="file" :class="[{ selected: file.selected }, { folder: file.isDirectory }]" @click="onClick(file)" @dblclick="onDblClick(file)">
+			<td class="name"><i class="fa" :class="file.iconClass" aria-hidden="true"></i> {{ file.name }}</td>
 			<td class="size">{{ file.size | kbSize }}</td>
 			<td class="created">{{ file.created | toShortDate }}</td>
 		</tr>
