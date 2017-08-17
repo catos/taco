@@ -25,6 +25,7 @@ header {
 main {
     display: flex;
     flex-direction: row;
+    flex: 1;
 }
 
 footer {
@@ -41,6 +42,7 @@ footer {
 
 .filelist .path {
     width: 100%;
+    padding-bottom: 5px;
 }
 
 .filelist .path input {
@@ -60,7 +62,7 @@ footer {
 .filelist .files {
     flex: 1 1 auto;
     overflow-y: auto;
-    min-height: 0px;
+    /* min-height: 0px; */
 }
 
 /***************************************************/
