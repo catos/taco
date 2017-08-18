@@ -10,8 +10,8 @@ const PARENT_DIRECTORY = {
     isDirectory: true
 }
 
-Vue.component('filelist', {
-    template: '#filelist',
+Vue.component('explorer', {
+    template: '#explorer',
     props: ['id'],
     data: function () {
         return {
@@ -52,12 +52,12 @@ Vue.component('filelist', {
                 })
         },
         isActive: function () {
-            return this.$store.state.activeFilelist === this.id
+            return this.$store.state.activeExplorer === this.id
         }
     },
     methods: {
         onMouseOver: function () {
-            this.$store.commit('setActiveFilelist', this.id)
+            this.$store.commit('setActiveExplorer', this.id)
         },
         changeFolder: function (folder) {
             this.path = (folder === '..') ?

@@ -8,7 +8,6 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
-- Rename filelist to ...
 - ESLint
 - Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)

@@ -22,8 +22,8 @@
 		</header>
 
 		<main>
-			<filelist id="filelist-1"></filelist>
-			<filelist id="filelist-2"></filelist>
+			<explorer id="explorer-1"></explorer>
+			<explorer id="explorer-2"></explorer>
 		</main>
 
 		<footer>
@@ -32,8 +32,8 @@
 
 	</div>
 
-	<!-- FILELIST TEMPLATE -->
-	<template id="filelist">
+	<!-- EXPLORER TEMPLATE -->
+	<template id="explorer">
 		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
 			<div class="path">
 				<input id="path" class="path" ref="path" type="text" v-model="path" @keyup.enter="getFiles()" />
@@ -62,8 +62,8 @@
 	<script src="../../node_modules/vuex/dist/vuex.min.js"></script>
 	<script>
 		require('./store')
-		require('./filelist/filelist')
-		require('./filelist/file')
+		require('./explorer/explorer')
+		require('./explorer/file')
 		require('./main')
 	</script>
 </body>

@@ -1,13 +1,13 @@
 const store = new Vuex.Store({
     state: {
         count: 0,
-        activeFilelist: 'filelist-1'
+        activeExplorer: 'explorer-1'
     },
     mutations: {
         increment: state => state.count++,
         decrement: state => state.count--,
-        setActiveFilelist: function (state, id) {
-            state.activeFilelist = id
+        setActiveExplorer: function (state, id) {
+            state.activeExplorer = id
         }
     }
 })
