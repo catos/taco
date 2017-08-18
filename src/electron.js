@@ -1,9 +1,5 @@
-const path = require('path')
-
-// ------------------------------------------------------------
-
 const electron = require('electron')
-const { app, clipboard, globalShortcut, Menu, Tray, BrowserWindow } = electron
+const { app, globalShortcut, BrowserWindow } = electron
 
 // ------------------------------------------------------------
 
@@ -13,58 +9,58 @@ const appTray = require('./electron/tray')
 
 // ------------------------------------------------------------
 
-let mainWindow
+let mainWindow = null
 
-app.on('ready', _ => {
-    mainWindow = new BrowserWindow({
-        width: 1600,
-        height: 900
-    })
+app.on('ready', function () {
+	mainWindow = new BrowserWindow({
+		width: 1600,
+		height: 900
+	})
 
-    mainWindow.openDevTools()
+	mainWindow.openDevTools()
 
-    // mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
-    // mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
-    mainWindow.loadURL(`file://${__dirname}/app/index.html`);
-    
-    mainWindow.on('close', _ => {
-        mainWindow = null
-    })
+	// mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
+	// mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
+	mainWindow.loadURL('file://' + __dirname + '/app/index.html')
 
-    // GLOBAL shortcuts: only use for focus on app
-    // globalShortcut.register('CommandOrControl+T', _ => {
-    //     mainWindow.focus()
-    // })
+	mainWindow.on('close', function () {
+		mainWindow = null
+	})
+
+	// GLOBAL shortcuts: only use for focus on app
+	// globalShortcut.register('CommandOrControl+T', function ()  {
+	//     mainWindow.focus()
+	// })
 
 	// TODO: LOCAL shortcuts && setup / naming convention on shortcuts....
-    globalShortcut.register('CommandOrControl+Alt+D', _ => {
-        mainWindow.webContents.send('capture', app.getPath('pictures'))
-    })
+	globalShortcut.register('CommandOrControl+Alt+D', function () {
+		mainWindow.webContents.send('capture', app.getPath('pictures'))
+	})
 
-    globalShortcut.register('Escape', _ => {
-        mainWindow.webContents.send('shortcut-escape', 'weee!')
-    })
+	globalShortcut.register('Escape', function () {
+		mainWindow.webContents.send('shortcut-escape', 'weee!')
+	})
 
-    appMenu.buildAndSet(mainWindow)
-    appTray.create();
+	appMenu.buildAndSet(mainWindow)
+	appTray.create()
 
-    // let stack = []
-    // appClipboard.checkForChange(clipboard, text => {
-    //     stack = appClipboard.addToStack(text, stack)
-    //     appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
+	// let stack = []
+	// appClipboard.checkForChange(clipboard, text => {
+	//     stack = appClipboard.addToStack(text, stack)
+	//     appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
 
-    //     appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
-    //     appMenu.buildAndSet(mainWindow)
+	//     appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
+	//     appMenu.buildAndSet(mainWindow)
 
-    //     console.log('stack', stack);
-    // })
+	//     console.log('stack', stack);
+	// })
 })
 
-app.on('will-quit', _ => {
-    console.log('will-quit!')
-    globalShortcut.unregisterAll()
+app.on('will-quit', function () {
+	console.log('will-quit!')
+	globalShortcut.unregisterAll()
 })
 
-app.on('quit', _ => {
-    console.log('quit!')
+app.on('quit', function () {
+	console.log('quit!')
 })

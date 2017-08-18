@@ -4,13 +4,13 @@ const path = require('path')
 Vue.component('file', {
 	template: '#file',
 	props: ['file'],
-	data: () => {
-		return {
+	data: function () {
+		return { 
 			selected: false
 		}
 	},
 	methods: {
-		onClick: function (file) {
+		onClick: function () {
 			this.file.selected = !this.file.selected
 		},
 		onDblClick: function (file) {
@@ -27,7 +27,7 @@ Vue.component('file', {
 				return ''
 
 			// Display size in KB
-			var result = Math.floor(value / 1024)
+			let result = Math.floor(value / 1024)
 
 			// Min size is 1
 			if (result < 1)

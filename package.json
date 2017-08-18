@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/catos/taco#readme",
   "devDependencies": {
-    "electron": "1.7.5"
+    "electron": "1.7.5",
+    "eslint": "4.4.1"
   },
   "dependencies": {
     "font-awesome": "4.7.0",
