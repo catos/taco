@@ -25,9 +25,15 @@ exports.buildAndSet = (window) => {
                     enabled: false
                 },
                 {
+                    label: 'Focus on explorer path',
+                    click: _ => {
+                        window.webContents.send('shortcut-path-focus')
+                    },
+                    accelerator: 'CommandOrControl+P'
+                },
+                {
                     label: 'Go to Home-folder',
                     click: _ => {
-                        console.log('goto home folder')
                         window.webContents.send('shortcut-goto-home')
                     },
                     accelerator: 'CommandOrControl+H'

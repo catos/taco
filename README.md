@@ -2,7 +2,7 @@
 
 ## Refs
 - Vue documentation: https://vuejs.org/v2/guide/index.html
-- Material Design Lite: https://getmdl.io/components/index.html
+- Vuex documentation: https://vuex.vuejs.org/en/
 - Todo app: https://jsfiddle.net/yyx990803/4dr2fLb7/?utm_source=website&utm_medium=embed&utm_campaign=4dr2fLb7
 - Tree nav app: https://jsfiddle.net/yyx990803/3p0j5sgy/?utm_source=website&utm_medium=embed&utm_campaign=3p0j5sgy
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
