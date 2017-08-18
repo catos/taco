@@ -28,8 +28,10 @@ Vue.component('explorer', {
         })
 
         ipcRenderer.on('shortcut-goto-home', (event) => {
-            this.path = HOMEPATH
-            this.getFiles()
+            if (this.$store.state.activeExplorer === this.id) {
+                this.path = HOMEPATH
+                this.getFiles()
+            }
         })
 
         ipcRenderer.on('shortcut-escape', (event, message) => {
