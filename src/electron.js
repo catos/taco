@@ -41,10 +41,6 @@ app.on('ready', _ => {
         mainWindow.webContents.send('capture', app.getPath('pictures'))
     })
 
-    globalShortcut.register('CommandOrControl+T', _ => {
-        mainWindow.webContents.send('shortcut-path-focus', 'weee!')
-    })
-
     globalShortcut.register('Escape', _ => {
         mainWindow.webContents.send('shortcut-escape', 'weee!')
     })
