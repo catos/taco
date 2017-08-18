@@ -32,8 +32,10 @@
 	<!-- EXPLORER TEMPLATE -->
 	<template id="explorer">
 		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
+			path: {{ path }}
+			requestPath: {{ requestPath }}
 			<div class="path">
-				<input id="path" class="path" ref="path" type="text" v-model="path" @keyup.enter="getFiles()" />
+				<input id="path" class="path" ref="path" type="text" :value="path" v-bind="requestPath" @keyup="autoComplete" @keyup.enter="changeFolder" />
 			</div>
 			<div class="files">
 				<table class="table table-responsive">

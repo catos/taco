@@ -16,6 +16,7 @@ Vue.component('explorer', {
 	data: function () {
 		return {
 			path: HOMEPATH,
+			requestPath: '',
 			files: [PARENT_DIRECTORY]
 		}
 	},
@@ -71,6 +72,19 @@ Vue.component('explorer', {
 			}
 
 			this.getFiles()
+		},
+		autoComplete: function (event) {
+			if (event.which !== 13) {
+				this.requestPath += event.key
+				this.path += event.key
+				console.log('autoComplete', event)
+
+				console.log('asdf')
+				// let suggestions = this.files.find(function(file) {
+				// 	return file.name === 
+				// })
+				// console.log('suggestions: ', suggestions)
+			}
 		},
 		getFiles: function () {
 			let result = [PARENT_DIRECTORY]
