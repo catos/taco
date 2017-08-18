@@ -19,30 +19,32 @@ body {
 
 header {
     height: 64px;
-    background: lightblue;
+	background: rgb(96, 125, 139);
+	color: #ffffff;
 }
 
 main {
     display: flex;
     flex-direction: row;
-    flex: 1;
+	flex: 1;
+	background-color: #f6f6f6;
 }
 
 footer {
     height: 64px;
-    background: lightblue;
+	background: rgb(96, 125, 139);
+	color: #ffffff;
 }
 
 .explorer {
     padding: 10px;
     display: flex;
     flex: 1 1;
-    flex-direction: column;
-    background-color: #f1f1f1;
+	flex-direction: column;
 }
 
 .explorer.active {
-    background-color: #ffffff;
+	 background-color: #ffffff; 
 }
 
 .explorer .path {
