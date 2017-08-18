@@ -7,7 +7,8 @@ html, body {
 }
 
 body {
-	font-size: 14px;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 14px;	
 }
 
 #app {
@@ -37,7 +38,7 @@ footer {
 }
 
 .explorer {
-    padding: 10px;
+    padding: 0 10px 10px 10px;
     display: flex;
     flex: 1 1;
 	flex-direction: column;
@@ -49,7 +50,8 @@ footer {
 
 .explorer .path {
     width: 100%;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .explorer .path input {
@@ -61,12 +63,13 @@ footer {
     font-size: 16px;
     padding: 5px;
 }
-.explorer:focus {
-    border: 1px solid red;
+
+.explorer .path input {
+	border-bottom: 2px solid rgba(0,0,0,.05);
 }
 
-.explorer .path:focus {
-    border-bottom: 2px solid cadetblue;
+.explorer .path input:focus {
+	border-bottom: 2px solid rgb(96, 125, 139);
 }
 
 .explorer .files {

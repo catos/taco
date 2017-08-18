@@ -29,7 +29,7 @@ exports.buildAndSet = (window) => {
                     click: _ => {
                         window.webContents.send('shortcut-path-focus')
                     },
-                    accelerator: 'CommandOrControl+P'
+                    accelerator: 'CommandOrControl+T'
                 },
                 {
                     label: 'Go to Home-folder',

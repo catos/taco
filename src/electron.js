@@ -32,9 +32,9 @@ app.on('ready', _ => {
     })
 
     // GLOBAL shortcuts: only use for focus on app
-    globalShortcut.register('CommandOrControl+T', _ => {
-        mainWindow.focus()
-    })
+    // globalShortcut.register('CommandOrControl+T', _ => {
+    //     mainWindow.focus()
+    // })
 
 	// TODO: LOCAL shortcuts && setup / naming convention on shortcuts....
     globalShortcut.register('CommandOrControl+Alt+D', _ => {
