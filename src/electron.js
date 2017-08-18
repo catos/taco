@@ -9,7 +9,7 @@ const { app, clipboard, globalShortcut, Menu, Tray, BrowserWindow } = electron
 
 const appMenu = require('./electron/menu')
 const appTray = require('./electron/tray')
-const appClipboard = require('./electron/clipboard')
+// const appClipboard = require('./electron/clipboard')
 
 // ------------------------------------------------------------
 
@@ -17,8 +17,8 @@ let mainWindow
 
 app.on('ready', _ => {
     mainWindow = new BrowserWindow({
-        width: 1200,
-        height: 800
+        width: 1600,
+        height: 900
     })
 
     mainWindow.openDevTools()
@@ -53,16 +53,16 @@ app.on('ready', _ => {
     appMenu.buildAndSet(mainWindow)
     appTray.create();
 
-    let stack = []
-    appClipboard.checkForChange(clipboard, text => {
-        stack = appClipboard.addToStack(text, stack)
-        appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
+    // let stack = []
+    // appClipboard.checkForChange(clipboard, text => {
+    //     stack = appClipboard.addToStack(text, stack)
+    //     appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
 
-        appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
-        appMenu.buildAndSet(mainWindow)
+    //     appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
+    //     appMenu.buildAndSet(mainWindow)
 
-        console.log('stack', stack);
-    })
+    //     console.log('stack', stack);
+    // })
 })
 
 app.on('will-quit', _ => {

@@ -33,19 +33,24 @@ footer {
     background: lightblue;
 }
 
-.filelist {
+.explorer {
     padding: 10px;
     display: flex;
     flex: 1 1;
     flex-direction: column;
+    background-color: #f1f1f1;
 }
 
-.filelist .path {
+.explorer.active {
+    background-color: #ffffff;
+}
+
+.explorer .path {
     width: 100%;
     padding-bottom: 5px;
 }
 
-.filelist .path input {
+.explorer .path input {
     outline: none;
     border: none;
     border-bottom: 1px solid grey;
@@ -54,15 +59,15 @@ footer {
     font-size: 16px;
     padding: 5px;
 }
-.filelist:focus {
+.explorer:focus {
     border: 1px solid red;
 }
 
-.filelist .path:focus {
+.explorer .path:focus {
     border-bottom: 2px solid cadetblue;
 }
 
-.filelist .files {
+.explorer .files {
     flex: 1 1 auto;
     overflow-y: auto;
     /* min-height: 0px; */
@@ -70,43 +75,43 @@ footer {
 
 /***************************************************/
 
-.filelist tr.selected {
+.explorer tr.selected {
 	background-color: #e1e1ff;
 }
 
-.filelist tr:hover {
+.explorer tr:hover {
 	background-color: #eeeeff;
 }
 
-.filelist td {
+.explorer td {
 	padding: 0;
 	white-space: nowrap;
 	width: 1%;
 }
 
-.filelist .file {
+.explorer .file {
     cursor: default;
 }
 
-.filelist .name {
+.explorer .name {
     text-overflow: ellipsis;
     overflow: hidden;
 	white-space: nowrap;
 	max-width: 200px;
 }
 
-.filelist .size {
+.explorer .size {
 	width: 100px;
 }
 
-.filelist .created {
+.explorer .created {
 	padding-left: 10px;
 }
 
-.filelist .folder .name {
+.explorer .folder .name {
     color: blue;
 }
 
-.filelist .file .size {
+.explorer .file .size {
     text-align: right;
 }

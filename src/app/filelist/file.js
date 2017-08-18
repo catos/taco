@@ -11,7 +11,6 @@ Vue.component('file', {
 	},
 	methods: {
 		onClick: function (file) {
-			console.log('onclick', this.file);
 			this.file.selected = !this.file.selected
 		},
 		onDblClick: function (file) {

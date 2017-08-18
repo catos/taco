@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/catos/taco#readme",
   "devDependencies": {
-    "electron": "^1.6.6"
+    "electron": "1.7.5"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0"
+    "font-awesome": "4.7.0",
+    "vue": "2.4.2",
+    "vuex": "2.3.1"
   }
 }

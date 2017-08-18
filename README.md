@@ -9,7 +9,6 @@
 
 ## Todo
 - Rename filelist to ...
-- Set focus on filelist, may need a new component to contain filelists
 - ESLint
 - Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)

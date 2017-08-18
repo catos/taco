@@ -21,23 +21,21 @@ Vue.component('filelist', {
     },
     created: function () {
         this.getFiles()
-
-        console.log('this.id', this.id)
     },
     mounted: function () {
         ipcRenderer.on('shortcut-path-focus', (event, message) => {
             this.$refs.path.focus()
-		})
-		
+        })
+
         ipcRenderer.on('shortcut-goto-home', (event) => {
             this.path = HOMEPATH
             this.getFiles()
-		})
-		
+        })
+
         ipcRenderer.on('shortcut-escape', (event, message) => {
             this.files.forEach((file) => {
-				file.selected = false
-			}, this);
+                file.selected = false
+            }, this);
         })
     },
     computed: {
@@ -52,14 +50,16 @@ Vue.component('filelist', {
                 .sort(function (a, b) {
                     return cmp(a.order, b.order) || cmp(a.name, b.name)
                 })
+        },
+        isActive: function () {
+            return this.$store.state.activeFilelist === this.id
         }
     },
     methods: {
         onMouseOver: function () {
-            console.log('mouse over!')
-            this.$emit('set-focus', this.id)
+            this.$store.commit('setActiveFilelist', this.id)
         },
-        onChangeFolder: function (folder) {
+        changeFolder: function (folder) {
             this.path = (folder === '..') ?
                 path.join(this.path, '..') :
                 path.join(this.path, folder)
@@ -86,7 +86,7 @@ Vue.component('filelist', {
                         name: file,
                         path: this.path,
                         iconClass: 'fa-file-o',
-						selected: false,
+                        selected: false,
                         isDirectory: stats.isDirectory,
                         size: stats.size,
                         created: stats.created

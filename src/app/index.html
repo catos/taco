@@ -9,14 +9,16 @@
 	 crossorigin="anonymous">
 	<link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="./styles.css">
-	<script src="https://unpkg.com/vue"></script>
 </head>
 
 <body>
 	<div id="app">
-
+		
 		<header>
-			Header
+			<b>Header</b>
+			Count: {{ count }}
+			<button @click="increment">+</button>
+			<button @click="decrement">-</button>
 		</header>
 
 		<main>
@@ -32,14 +34,14 @@
 
 	<!-- FILELIST TEMPLATE -->
 	<template id="filelist">
-		<div class="filelist" :id="id" @mouseover="onMouseOver">
+		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
 			<div class="path">
 				<input id="path" class="path" ref="path" type="text" v-model="path" @keyup.enter="getFiles()" />
 			</div>
 			<div class="files">
 				<table class="table table-responsive">
 					<tbody>
-						<tr is="file" v-for="file in sortedFiles" :key="file.name" :file="file" v-on:change-folder="onChangeFolder"></tr>
+						<tr is="file" v-for="file in sortedFiles" :key="file.name" :file="file" v-on:change-folder="changeFolder"></tr>
 					</tbody>
 				</table>
 			</div>
@@ -56,7 +58,10 @@
 	</template>
 
 	<!-- SCRIPTS -->
+	<script src="../../node_modules/vue/dist/vue.min.js"></script>
+	<script src="../../node_modules/vuex/dist/vuex.min.js"></script>
 	<script>
+		require('./store')
 		require('./filelist/filelist')
 		require('./filelist/file')
 		require('./main')
