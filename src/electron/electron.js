@@ -3,9 +3,9 @@ const { app, globalShortcut, BrowserWindow } = electron
 
 // ------------------------------------------------------------
 
-const appMenu = require('./electron/menu')
-const appTray = require('./electron/tray')
-// const appClipboard = require('./electron/clipboard')
+const appMenu = require('./menu')
+const appTray = require('./tray')
+// const appClipboard = require('./clipboard')
 
 // ------------------------------------------------------------
 
@@ -21,7 +21,7 @@ app.on('ready', function () {
 
 	// mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
 	// mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
-	mainWindow.loadURL('file://' + __dirname + '/app/index.html')
+	mainWindow.loadURL('file://' + __dirname + '/../app/index.html')
 
 	mainWindow.on('close', function () {
 		mainWindow = null

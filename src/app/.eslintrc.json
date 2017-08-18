@@ -27,6 +27,7 @@
 		"no-var": "error"
 	},
 	"globals": {
-		"Vue": true
+		"Vue": true,
+		"Vuex": true
 	}
 }

@@ -3,7 +3,7 @@
   "productName": "TaCommander",
   "version": "1.0.0",
   "description": "",
-  "main": "src/electron.js",
+  "main": "src/electron/electron.js",
   "scripts": {
     "start": "electron ."
   },
