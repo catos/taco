@@ -16,7 +16,8 @@ Vue.component('explorer', {
 	data: function () {
 		return {
 			path: HOMEPATH,
-			requestPath: '',
+			pathValue: HOMEPATH,
+			fileSuggestions: [],
 			files: [PARENT_DIRECTORY]
 		}
 	},
@@ -62,7 +63,7 @@ Vue.component('explorer', {
 		onMouseOver: function () {
 			this.$store.commit('setActiveExplorer', this.id)
 		},
-		changeFolder: function (folder) {
+		openFolder: function (folder) {
 			this.path = (folder === '..') ?
 				path.join(this.path, '..') :
 				path.join(this.path, folder)
@@ -73,22 +74,45 @@ Vue.component('explorer', {
 
 			this.getFiles()
 		},
-		autoComplete: function (event) {
+		openPath: function () {
+			this.path = this.pathValue
+			this.getFiles()
+		},
+		autoCompleteSearch: function (event) {
 			if (event.which !== 13) {
-				this.requestPath += event.key
-				this.path += event.key
-				console.log('autoComplete', event)
+				let folderPartial = this.pathValue
+					.replace(this.path, '')
+					.replace('\\', '')
+					.toLowerCase()
 
-				console.log('asdf')
-				// let suggestions = this.files.find(function(file) {
-				// 	return file.name === 
-				// })
-				// console.log('suggestions: ', suggestions)
+				if (!folderPartial.length) {
+					return
+				}
+				
+				this.fileSuggestions = []
+				let self = this
+				this.files.find(function(file) {
+					if (file.name.toLowerCase().startsWith(folderPartial))
+						self.fileSuggestions.push(file.name)
+				})
+				console.log('folderPartial: ', folderPartial, ', this.fileSuggestions: ', this.fileSuggestions)
 			}
 		},
+		autoCompleteTraverse: function () {
+			this.pathValue = path.join(
+				this.path,
+				this.fileSuggestions[0]) 
+		},
 		getFiles: function () {
-			let result = [PARENT_DIRECTORY]
+			// Append trailing slash
+			if (this.path.substr(-1) != '\\')
+				this.path += '\\'
 
+			// Reset path value to current path
+			this.pathValue = this.path
+
+			// Init result with '..' and read directory
+			let result = [PARENT_DIRECTORY]
 			fs.readdir(this.path, (err, files) => {
 				if (err) {
 					throw err

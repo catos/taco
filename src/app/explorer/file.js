@@ -15,7 +15,7 @@ Vue.component('file', {
 		},
 		onDblClick: function (file) {
 			if (file.isDirectory) {
-				this.$emit('change-folder', file.name)
+				this.$emit('open-folder', file.name)
 			} else {
 				shell.openItem(path.join(file.path, file.name))
 			}

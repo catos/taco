@@ -8,13 +8,16 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
-- ESLint
 - Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)
 - Refactor custom vue events (add "mediator" which logs events)
-- Right click menu on files
+- Need pretty popups for right-click-menu & autocomplete
+	- Right click menu on files
+	- Continue autocomplete, autoCompleteTraverse only takes first
+		- '.' + [TAB] => goes to parent folder
 - Continue select files thingy
 - Continue icons-implementation
 - Detect if file is text or binary
 - Add more file properties
+- Unzip: https://github.com/EvanOxfeld/node-unzip
 

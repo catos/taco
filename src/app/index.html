@@ -32,15 +32,17 @@
 	<!-- EXPLORER TEMPLATE -->
 	<template id="explorer">
 		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
-			path: {{ path }}
-			requestPath: {{ requestPath }}
 			<div class="path">
-				<input id="path" class="path" ref="path" type="text" :value="path" v-bind="requestPath" @keyup="autoComplete" @keyup.enter="changeFolder" />
+				<input id="path" class="path" ref="path" type="text" 
+					v-model="pathValue" 
+					@keyup="autoCompleteSearch" 
+					@keydown.tab.prevent="autoCompleteTraverse" 
+					@keyup.enter="openPath" />
 			</div>
 			<div class="files">
 				<table class="table table-responsive">
 					<tbody>
-						<tr is="file" v-for="file in sortedFiles" :key="file.name" :file="file" v-on:change-folder="changeFolder"></tr>
+						<tr is="file" v-for="file in sortedFiles" :key="file.name" :file="file" v-on:open-folder="openFolder"></tr>
 					</tbody>
 				</table>
 			</div>
