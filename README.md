@@ -8,6 +8,7 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
+- Folder summary in bottom of explorer
 - Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)
 - Refactor custom vue events (add "mediator" which logs events)
