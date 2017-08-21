@@ -33,6 +33,7 @@
 	<template id="explorer">
 		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
 			<div class="path">
+				{{ pathValue }}
 				<input id="path" class="path" ref="path" type="text" 
 					v-model="pathValue" 
 					@keyup="autoCompleteSearch" 
@@ -47,7 +48,7 @@
 				</table>
 			</div>
 			<div class="summary">
-				Files: {{ file.length }}
+				Total: {{ summary.total }}, Folders: {{ summary.folders }}, Files: {{ summary.files }}
 			</div>
 		</div>
 	</template>

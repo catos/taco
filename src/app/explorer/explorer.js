@@ -18,7 +18,12 @@ Vue.component('explorer', {
 			path: HOMEPATH,
 			pathValue: HOMEPATH,
 			fileSuggestions: [],
-			files: [PARENT_DIRECTORY]
+			files: [PARENT_DIRECTORY],
+			summary: {
+				total: 0,
+				folders: 0,
+				files: 0
+			}
 		}
 	},
 	created: function () {
@@ -82,7 +87,7 @@ Vue.component('explorer', {
 			if (event.which !== 13) {
 				let folderPartial = this.pathValue
 					.replace(this.path, '')
-					.replace('\\', '')
+					.replace(path.sep, '')
 					.toLowerCase()
 
 				if (!folderPartial.length) {
@@ -101,12 +106,11 @@ Vue.component('explorer', {
 		autoCompleteTraverse: function () {
 			this.pathValue = path.join(
 				this.path,
-				this.fileSuggestions[0]) 
+				this.fileSuggestions[0])
 		},
 		getFiles: function () {
 			// Append trailing slash
-			if (this.path.substr(-1) != '\\')
-				this.path += '\\'
+			this.path = path.join(this.path, path.sep)
 
 			// Reset path value to current path
 			this.pathValue = this.path
@@ -140,7 +144,28 @@ Vue.component('explorer', {
 					result.push(entry)
 				}
 			})
+
+			this.getSummary()
 			this.files = result
+		},
+		getSummary: function () {
+			this.summary = {
+				total: 0,
+				folders: 0,
+				files: 0
+			}
+
+			this.files.forEach(function(file) {
+				this.summary.total++
+
+				if (file.isDirectory) {
+					this.summary.folders++
+				} else {
+					this.summary.files++
+				}
+			}, this)
+
+			console.log('this.summary', this.summary)
 		},
 		fileStats: function (path) {
 			try {

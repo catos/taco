@@ -21,4 +21,5 @@
 - Detect if file is text or binary
 - Add more file properties
 - Unzip: https://github.com/EvanOxfeld/node-unzip
-
+- https://nodejs.org/api/path.html#path_path_format_pathobject
+- https://nodejs.org/api/path.html#path_path_normalize_path på getFiles, eller this.path kanskje ?
