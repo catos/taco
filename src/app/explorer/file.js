@@ -1,6 +1,8 @@
 const shell = require('electron').shell
 const path = require('path')
 
+const ExplorerItem = require('../shared/explorer-item.js')
+
 Vue.component('file', {
 	template: '#file',
 	props: ['file'],
@@ -22,38 +24,11 @@ Vue.component('file', {
 		}
 	},
 	filters: {
-		dynamicFileSize: function (value) {
-			if (!value)
-				return ''
-
-			let unit = ' B'
-			let result = value
-
-			// Display size in KB
-			if (value > 1024) {
-				result = Math.round(value / 1024)
-				unit = ' KB'
-			}
-
-			// Display size in MB
-			if (value > 1048576) {
-				result = Math.round(value / 1024 / 1024)
-				unit = ' MB'
-			}
-
-			// Format number
-			result = result.toLocaleString(undefined, { minimumFractionDigits: 0 })
-
-			return result.concat(unit)
+		toShortSize: function (value) {
+			return ExplorerItem.toShortSize(value)
 		},
-		byteSize: function (value) {
-			if (!value)
-				return ''
-
-			// Format number
-			value = value.toLocaleString(undefined, { minimumFractionDigits: 0 })
-
-			return value.concat(' KB')
+		toByteSize: function (value) {
+			return ExplorerItem.toByteSize(value)
 		},
 		toShortDate: function (value) {
 			if (!value)

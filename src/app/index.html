@@ -23,10 +23,6 @@
 			<explorer id="explorer-2"></explorer>
 		</main>
 
-		<footer>
-			Footer
-		</footer>
-
 	</div>
 
 	<!-- EXPLORER TEMPLATE -->
@@ -40,14 +36,14 @@
 					@keyup.enter="openPath" />
 			</div>
 			<div class="files">
-				<table class="table table-responsive">
+				<table>
 					<tbody>
 						<tr is="file" v-for="file in sortedFiles" :key="file.name" :file="file" v-on:open-folder="openFolder"></tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="summary">
-				Total: {{ summary.total }}, Folders: {{ summary.folders }}, Files: {{ summary.files }}
+				{{ summary.total }} items with a total size of: {{ summary.size | toShortSize }}, {{ summary.folders }} folder and {{ summary.files }} files
 			</div>
 		</div>
 	</template>
@@ -55,8 +51,8 @@
 	<!-- FILE TEMPLATE -->
 	<template id="file">
 		<tr class="file" :class="[{ selected: file.selected }, { folder: file.isDirectory }]" @click="onClick(file)" @dblclick="onDblClick(file)">
-			<td class="name"><i class="fa" :class="file.iconClass" aria-hidden="true"></i> {{ file.name }}</td>
-			<td class="size" :title="file.size | byteSize">{{ file.size | dynamicFileSize }}</td>
+			<td class="name"><i class="fa" :class="file.getIcon()" aria-hidden="true"></i> {{ file.name }}</td>
+			<td class="size" :title="file.size | toByteSize">{{ file.size | toShortSize }}</td>
 			<td class="created">{{ file.created | toShortDate }}</td>
 		</tr>
 	</template>
@@ -67,6 +63,7 @@
 	
 	 <script>
 		require('./store')
+		require('./shared/explorer-item.js')
 		require('./explorer/explorer')
 		require('./explorer/file')
 		require('./main')

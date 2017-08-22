@@ -2,13 +2,14 @@ const fs = require('fs')
 const path = require('path')
 const ipcRenderer = require('electron').ipcRenderer
 
+const ExplorerItem = require('../shared/explorer-item.js')
+
 const HOMEPATH = (process.platform === 'win32') ? process.env.HOMEPATH : process.env.HOME
-const PARENT_DIRECTORY = {
+const PARENT_DIRECTORY = new ExplorerItem('..', {
 	order: -1,
-	name: '..',
-	iconClass: 'fa-folder-o',
+	path: '..',
 	isDirectory: true
-}
+})
 
 Vue.component('explorer', {
 	template: '#explorer',
@@ -93,10 +94,10 @@ Vue.component('explorer', {
 				if (!folderPartial.length) {
 					return
 				}
-				
+
 				this.fileSuggestions = []
 				let self = this
-				this.files.find(function(file) {
+				this.files.find(function (file) {
 					if (file.name.toLowerCase().startsWith(folderPartial))
 						self.fileSuggestions.push(file.name)
 				})
@@ -122,26 +123,23 @@ Vue.component('explorer', {
 					throw err
 				}
 
-				for (let file of files) {
-					let stats = this.fileStats(path.join(this.path, file))
+				for (let fileName of files) {
+					let stats = this.fileStats(path.join(this.path, fileName))
 
-					let entry = {
+					let item = new ExplorerItem(fileName, {
 						order: 1,
-						name: file,
 						path: this.path,
-						iconClass: 'fa-file-o',
 						selected: false,
 						isDirectory: stats.isDirectory,
-						size: stats.size,
+						size: stats.size === undefined ? 0 : stats.size,
 						created: stats.created
+					})
+
+					if (item.isDirectory) {
+						item.order = 0
 					}
 
-					if (entry.isDirectory) {
-						entry.order = 0
-						entry.iconClass = 'fa-folder-o'
-					}
-
-					result.push(entry)
+					result.push(item)
 				}
 				this.getSummary()
 			})
@@ -152,10 +150,12 @@ Vue.component('explorer', {
 			this.summary = {
 				total: 0,
 				folders: 0,
-				files: 0
+				files: 0,
+				size: 0
 			}
 
-			this.files.forEach(function(file) {
+			this.files.forEach(function (file) {
+				this.summary.size += file.size
 				this.summary.total++
 
 				if (file.isDirectory) {
@@ -164,8 +164,6 @@ Vue.component('explorer', {
 					this.summary.files++
 				}
 			}, this)
-
-			console.log('this.summary', this.summary)
 		},
 		fileStats: function (path) {
 			try {
@@ -180,5 +178,10 @@ Vue.component('explorer', {
 				return false
 			}
 		},
+	},
+	filters: {
+		toShortSize: function (value) {
+			return ExplorerItem.toShortSize(value)
+		}
 	}
 })
