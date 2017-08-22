@@ -8,7 +8,9 @@
 - "Reddit" app: https://jsfiddle.net/coligo/g7mu5ndz/?utm_source=website&utm_medium=embed&utm_campaign=g7mu5ndz
 
 ## Todo
-- Folder summary in bottom of explorer
+- Finn en fin theme i vs-code og stjel farger!
+- Frameless window https://github.com/electron/electron/blob/master/docs/api/frameless-window.md
+- Ctrl + 1, +2 for focusing on explorers
 - Add eventlog for debuging
 - Refactor global shortcuts (add "mediator" which logs events)
 - Refactor custom vue events (add "mediator" which logs events)
@@ -23,4 +25,3 @@
 - Unzip: https://github.com/EvanOxfeld/node-unzip
 - https://nodejs.org/api/path.html#path_path_format_pathobject
 - https://nodejs.org/api/path.html#path_path_normalize_path på getFiles, eller this.path kanskje ?
-- file-object { name: "asdf", isDir ... } <- wtb own type on this

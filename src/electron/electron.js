@@ -14,7 +14,8 @@ let mainWindow = null
 app.on('ready', function () {
 	mainWindow = new BrowserWindow({
 		width: 1600,
-		height: 900
+		height: 900,
+		frame: false
 	})
 
 	mainWindow.openDevTools()

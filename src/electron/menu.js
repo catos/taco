@@ -56,5 +56,6 @@ exports.buildAndSet = (window) => {
 		}
 	]
 
-	Menu.setApplicationMenu(Menu.buildFromTemplate(template))
+	// Menu.setApplicationMenu(Menu.buildFromTemplate(template))	
+	Menu.setApplicationMenu(null)
 }

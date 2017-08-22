@@ -25,6 +25,8 @@ header {
     color: #ffffff;
     align-items: center;
     display: flex;
+    -webkit-user-select: none;
+    -webkit-app-region: drag;
 }
 
 header ul {
