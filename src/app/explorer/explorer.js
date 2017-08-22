@@ -143,9 +143,9 @@ Vue.component('explorer', {
 
 					result.push(entry)
 				}
+				this.getSummary()
 			})
 
-			this.getSummary()
 			this.files = result
 		},
 		getSummary: function () {

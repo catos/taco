@@ -33,7 +33,6 @@
 	<template id="explorer">
 		<div class="explorer" :class="{ active: isActive }" :id="id" @mouseover="onMouseOver">
 			<div class="path">
-				{{ pathValue }}
 				<input id="path" class="path" ref="path" type="text" 
 					v-model="pathValue" 
 					@keyup="autoCompleteSearch" 
@@ -57,7 +56,7 @@
 	<template id="file">
 		<tr class="file" :class="[{ selected: file.selected }, { folder: file.isDirectory }]" @click="onClick(file)" @dblclick="onDblClick(file)">
 			<td class="name"><i class="fa" :class="file.iconClass" aria-hidden="true"></i> {{ file.name }}</td>
-			<td class="size">{{ file.size | kbSize }}</td>
+			<td class="size" :title="file.size | byteSize">{{ file.size | dynamicFileSize }}</td>
 			<td class="created">{{ file.created | toShortDate }}</td>
 		</tr>
 	</template>

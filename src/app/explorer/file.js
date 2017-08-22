@@ -22,21 +22,38 @@ Vue.component('file', {
 		}
 	},
 	filters: {
-		kbSize: function (value) {
+		dynamicFileSize: function (value) {
 			if (!value)
 				return ''
 
-			// Display size in KB
-			let result = Math.floor(value / 1024)
+			let unit = ' B'
+			let result = value
 
-			// Min size is 1
-			if (result < 1)
-				result = 1
+			// Display size in KB
+			if (value > 1024) {
+				result = Math.round(value / 1024)
+				unit = ' KB'
+			}
+
+			// Display size in MB
+			if (value > 1048576) {
+				result = Math.round(value / 1024 / 1024)
+				unit = ' MB'
+			}
 
 			// Format number
 			result = result.toLocaleString(undefined, { minimumFractionDigits: 0 })
 
-			return result + ' KB'
+			return result.concat(unit)
+		},
+		byteSize: function (value) {
+			if (!value)
+				return ''
+
+			// Format number
+			value = value.toLocaleString(undefined, { minimumFractionDigits: 0 })
+
+			return value.concat(' KB')
 		},
 		toShortDate: function (value) {
 			if (!value)

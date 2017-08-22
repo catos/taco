@@ -105,18 +105,22 @@ footer {
 	max-width: 200px;
 }
 
-.explorer .size {
-	width: 100px;
-}
-
-.explorer .created {
-	padding-left: 10px;
-}
-
 .explorer .folder .name {
     color: blue;
 }
 
+.explorer .size {
+	width: 100px;
+}    
+
+.explorer .created {
+	padding-left: 10px;
+    color: #808080;
+    font-size: 0.9em;
+}    
+
 .explorer .file .size {
     text-align: right;
+    color: #808080;
+    font-size: 0.9em;
 }
