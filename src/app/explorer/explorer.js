@@ -81,6 +81,7 @@ Vue.component('explorer', {
 			this.getFiles()
 		},
 		openPath: function () {
+			// TODO: open item, not just folder
 			this.path = this.pathValue
 			this.getFiles()
 		},

@@ -20,9 +20,23 @@ body {
 }
 
 header {
-    height: 64px;
+    height: 48px;
 	background: rgb(96, 125, 139);
-	color: #ffffff;
+    color: #ffffff;
+    align-items: center;
+    display: flex;
+}
+
+header ul {
+    display: flex;
+    flex: 1;
+    margin: 0;
+}
+
+header ul li {
+    padding: 0 10px;
+    display: flex;
+    flex: 1 1;
 }
 
 main {
@@ -45,7 +59,6 @@ main {
 
 .explorer .path {
     width: 100%;
-    padding-bottom: 10px;
     padding-top: 10px;
 }
 
@@ -119,17 +132,18 @@ main {
 .explorer .created {
 	padding-left: 10px;
     color: #808080;
-    font-size: 0.9em;
+    font-size: 12px;
 }    
 
 .explorer .file .size {
     text-align: right;
     color: #808080;
-    font-size: 0.9em;
+    font-size: 12px;
 }
 
 .explorer .summary {
     border-top: 2px solid rgba(0,0,0,.05);
     background-color: whitesmoke;
     padding: 5px 10px;
+    font-size: 12px;
 }
