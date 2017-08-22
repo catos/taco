@@ -11,7 +11,7 @@
 - Finn en fin theme i vs-code og stjel farger!
 - Frameless window https://github.com/electron/electron/blob/master/docs/api/frameless-window.md
 - Ctrl + 1, +2 for focusing on explorers
-- Add eventlog for debuging
+- Add eventlog for debugging
 - Refactor global shortcuts (add "mediator" which logs events)
 - Refactor custom vue events (add "mediator" which logs events)
 - Need pretty popups for right-click-menu & autocomplete
@@ -25,3 +25,6 @@
 - Unzip: https://github.com/EvanOxfeld/node-unzip
 - https://nodejs.org/api/path.html#path_path_format_pathobject
 - https://nodejs.org/api/path.html#path_path_normalize_path på getFiles, eller this.path kanskje ?
+- Hide size on folders
+- Clean up styles.css
+- Register global shortcut to set focus on Tacommander (?) globalShortcut.register('CommandOrControl+T', function () {

@@ -1,3 +1,7 @@
+// globalShortcut.register('CommandOrControl+Alt+D', function () {
+//     win.webContents.send('capture', app.getPath('pictures'))
+// })
+
 const electron = require('electron')
 const fs = require('fs')
 const path = require('path')

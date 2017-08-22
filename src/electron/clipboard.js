@@ -1,9 +1,20 @@
+// let stack = []
+// appClipboard.checkForChange(clipboard, text => {
+//     stack = appClipboard.addToStack(text, stack)
+//     appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
+
+//     appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
+//     appMenu.buildAndSet(win)
+
+//     console.log('stack', stack);
+// })
+
 const CLIPBOARD_STACK_SIZE = 5
 const ITEM_MAX_LENGTH = 20
 
 exports.addToStack = (item, stack) => {
-    return [item].concat(stack.length >= CLIPBOARD_STACK_SIZE 
-        ? stack.slice(0, stack.length - 1) 
+    return [item].concat(stack.length >= CLIPBOARD_STACK_SIZE
+        ? stack.slice(0, stack.length - 1)
         : stack
     )
 }

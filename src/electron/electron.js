@@ -1,60 +1,37 @@
 const electron = require('electron')
 const { app, globalShortcut, BrowserWindow } = electron
+const electronLocalshortcut = require('electron-localshortcut')
 
-// ------------------------------------------------------------
-
-const appMenu = require('./menu')
-const appTray = require('./tray')
-// const appClipboard = require('./clipboard')
-
-// ------------------------------------------------------------
-
-let mainWindow = null
+let win = null
 
 app.on('ready', function () {
-	mainWindow = new BrowserWindow({
+	win = new BrowserWindow({
 		width: 1600,
 		height: 900,
-		frame: false
+		frame: false,
 	})
 
-	mainWindow.openDevTools()
+	win.openDevTools()
+	win.loadURL('file://' + __dirname + '/../app/index.html')
 
-	// mainWindow.loadURL(`file://${__dirname}/capture/capture.html`);
-	// mainWindow.loadURL(`file://${__dirname}/gitstatus/gitstatus.html`);
-	mainWindow.loadURL('file://' + __dirname + '/../app/index.html')
-
-	mainWindow.on('close', function () {
-		mainWindow = null
+	win.on('close', function () {
+		win = null
+		electronLocalshortcut.unregisterAll(win)
+		console.log('win.on -> close')
 	})
 
-	// GLOBAL shortcuts: only use for focus on app
-	// globalShortcut.register('CommandOrControl+T', function ()  {
-	//     mainWindow.focus()
-	// })
-
-	// TODO: LOCAL shortcuts && setup / naming convention on shortcuts....
-	globalShortcut.register('CommandOrControl+Alt+D', function () {
-		mainWindow.webContents.send('capture', app.getPath('pictures'))
+	// Local shortcuts
+	electronLocalshortcut.register(win, 'CommandOrControl+H', () => {
+		win.webContents.send('shortcut-goto-home')
 	})
 
-	globalShortcut.register('Escape', function () {
-		mainWindow.webContents.send('shortcut-escape', 'weee!')
+	electronLocalshortcut.register(win, 'Escape', () => {
+		win.webContents.send('shortcut-escape')
 	})
 
-	appMenu.buildAndSet(mainWindow)
-	appTray.create()
-
-	// let stack = []
-	// appClipboard.checkForChange(clipboard, text => {
-	//     stack = appClipboard.addToStack(text, stack)
-	//     appClipboard.registerShortcuts(globalShortcut, clipboard, stack)
-
-	//     appMenu.template[1].submenu = appClipboard.menuTemplate(clipboard, stack)
-	//     appMenu.buildAndSet(mainWindow)
-
-	//     console.log('stack', stack);
-	// })
+	electronLocalshortcut.register(win, 'CommandOrControl+T', () => {
+		win.webContents.send('shortcut-focus-path')
+	})
 })
 
 app.on('will-quit', function () {

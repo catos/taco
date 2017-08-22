@@ -9,7 +9,7 @@ module.exports = class ExplorerItem {
             selected: false,
             isDirectory: false,
             size: 0,
-            created: new Date().toISOString()
+            created: ''
         }
         let result = Object.assign({},
             defaults,
@@ -51,6 +51,6 @@ module.exports = class ExplorerItem {
             return ''
 
         // Format number
-        return value.toLocaleString(undefined, { minimumFractionDigits: 0 }).concat(' B')
+        return value.toLocaleString(undefined, { minimumFractionDigits: 0 }).concat(' bytes')
     }
 }
